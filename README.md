@@ -1,5 +1,15 @@
 # docker-helper-scripts
 
+## install
+
+```
+cd ~
+git clone git@github.com:AleksandrIvin/docker-helper-scripts.git
+cd docker-helper-scripts
+./make_links.sh
+
+```
+
 ## docker-helper-pgdump
 
 
