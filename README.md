@@ -13,7 +13,7 @@ cd docker-helper-scripts
 ## docker-helper-pgdump
 
 
-```docker-helper-pgdump docker_network container_host db_user db_password db_name pg_version options```
+```docker-helper-pgdump docker_network container_host db_user db_password db_name pg_version pgdump_options```
 
 - docker network
 - container host
@@ -21,9 +21,9 @@ cd docker-helper-scripts
 - db_password
 - db_name
 - pg_version
-- options
+- pgdump_options  - "-C -T cache --no-security-labels"
 
-```docker-helper-pgdump apps_default apps_db user1 simplepass testdb 9.4 -C```
+```docker-helper-pgdump apps_default apps_db user1 simplepass testdb 9.4 "-C --no-security-labels"```
 
 
 ## docker-helper-pgrestore
