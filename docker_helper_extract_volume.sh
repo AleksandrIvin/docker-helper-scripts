@@ -1,4 +1,4 @@
-#!/bin/bash 
+#!/bin/bash
 
 if [ -z $1 ];
 then
@@ -13,7 +13,7 @@ then
    echo "List of docker volumes: "
    docker volume ls -q | grep $1i
    exot 0
-fi 
+fi
 
 # exit 0
 
