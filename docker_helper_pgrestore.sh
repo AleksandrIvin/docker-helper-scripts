@@ -36,6 +36,8 @@ then
    exit 1
 fi
 
+DB_PATH=$(readlink -f $(dirname ${PG_DUMP_FILE}))
+DB_BASENAME=$(basename ${PG_DUMP_FILE})
 #docker volume ls -q | grep -x $1
 #if [ $? -ne 0 ];
 #then
@@ -51,11 +53,11 @@ echo "export PGPASSWORD=${DB_PASSWORD} && cd /tmp/export/data \
         && gzip -c dump.gz | psql -h dbhost -U ${DB_USER} ${DB_NAME}"
 echo `pwd`
 
-docker run --rm -it -v `pwd`:/tmp/export/data \
+docker run --rm -it -v $DB_PATH:/tmp/export/data \
     -e POSTGRES_PASSWORD=${DB_PASSWORD} \
     --link ${CONTAINER_NAME}:dbhost \
     --network ${NETWORK} \
     postgres:${PG_VERSION} \
     /bin/bash -c "export PGPASSWORD=${DB_PASSWORD} && cd /tmp/export/data \
-        && gunzip -c ${PG_DUMP_FILE} | psql -h dbhost -U ${DB_USER} ${DB_NAME}"
+        && gunzip -c ${DB_BASENAME} | psql -h dbhost -U ${DB_USER} ${DB_NAME}"
 
