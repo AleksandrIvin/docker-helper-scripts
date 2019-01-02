@@ -32,6 +32,13 @@ then
    exit 1
 fi
 
+DOCKER_TERMINAL_OPTIONS=""
+
+if [ -t 1 ] ;
+then
+   DOCKER_TERMINAL_OPTIONS="-it";
+fi
+
 #docker volume ls -q | grep -x $1
 #if [ $? -ne 0 ];
 #then
@@ -47,7 +54,7 @@ CURRENT_DATETIME=$(date '+%Y-%m-%d_%H-%M-%S')
 #EXPORT_DIR="${CONTAINER_NAME}-${CURRENT_DATETIME}"
 #mkdir ${EXPORT_DIR}
 
-docker run --rm -it -v `pwd`:/tmp/export/data \
+docker run --rm ${DOCKER_TERMINAL_OPTIONS} -v `pwd`:/tmp/export/data \
     -e POSTGRES_PASSWORD=${DB_PASSWORD} \
     --link ${CONTAINER_NAME}:dbhost \
     --network ${NETWORK} \
